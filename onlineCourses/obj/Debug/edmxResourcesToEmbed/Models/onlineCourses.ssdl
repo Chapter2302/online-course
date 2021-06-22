@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="onlineCoursesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Bio" Type="nvarchar(max)" />
+    <Property Name="Birthday" Type="date" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="Region" Type="nvarchar(max)" />
+    <Property Name="Country" Type="nvarchar(max)" />
+    <Property Name="StartDate" Type="date" />
+    <Property Name="BankID" Type="int" />
+    <Property Name="Photo" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="School" Type="nvarchar(max)" />
+    <Property Name="Rating" Type="int" />
+    <Property Name="WorkingPlace" Type="nvarchar(max)" />
+    <Property Name="isTeacher" Type="bit" />
+  </EntityType>
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TeacherID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="UploadDate" Type="date" />
+    <Property Name="StartDate" Type="date" />
+    <Property Name="SheduleHour" Type="time" Precision="7" />
+    <Property Name="ScheduleDate" Type="nvarchar" MaxLength="50" />
+    <Property Name="TimeExpire" Type="date" />
+    <Property Name="Link" Type="nvarchar(max)" />
+    <Property Name="Rating" Type="int" />
+    <Property Name="Price" Type="int" />
+    <Property Name="Discount" Type="float" />
+    <Property Name="Category" Type="nvarchar(max)" />
+    <Property Name="Photo" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Deal">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CourseID" Type="int" Nullable="false" />
+    <Property Name="StudentID" Type="int" Nullable="false" />
+    <Property Name="OrderDate" Type="date" />
+    <Property Name="State" Type="nvarchar(max)" />
+    <Property Name="Review" Type="nvarchar(max)" />
+    <Property Name="Rating" Type="int" />
+  </EntityType>
+  <Association Name="FK__Deal__CourseID__403A8C7D">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="Deal" Type="Self.Deal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Deal">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Course_Teacher">
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
+    <End Role="Course" Type="Self.Course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Course">
+        <PropertyRef Name="TeacherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Deal_Account">
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
+    <End Role="Deal" Type="Self.Deal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Deal">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="onlineCoursesModelStoreContainer">
+    <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Deal" EntityType="Self.Deal" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Deal__CourseID__403A8C7D" Association="Self.FK__Deal__CourseID__403A8C7D">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="Deal" EntitySet="Deal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Course_Teacher" Association="Self.FK_Course_Teacher">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="Course" EntitySet="Course" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Deal_Account" Association="Self.FK_Deal_Account">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="Deal" EntitySet="Deal" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,98 @@
+﻿<!-- Start Bradcaump area -->
+<div class="ht__bradcaump__area bg-image--5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="bradcaump__inner text-center">
+                    <h2 class="bradcaump-title">My Courses</h2>
+                    <nav class="bradcaump-content">
+                        <a class="breadcrumb_item" href="index.html">Home</a>
+                        <span class="brd-separetor">/</span>
+                        <span class="breadcrumb_item active">My Courses</span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Bradcaump area -->
+
+<!-- cart-main-area start -->
+<div class="wishlist-area section-padding--lg bg__white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="wishlist-content">
+                    <form action="#">
+                        <div class="table-content wnro__table table-responsive">
+                            <table>
+                                <thead>
+                                    <tr class="title-top">
+                                        <th class="product-thumbnail"></th>
+                                        <th class="product-name"><span class="nobr">Course Name</span></th>
+                                        <th class="product-price"><span class="nobr"> Order Date </span></th>
+                                        <th class="product-color-label"><span class="nobr"> Status </span></th>
+                                        <th class="product-name"><span class="nobr"> Link Zoom </span></th>
+                                        <th class="product-quantity"><span class="nobr"> Rate </span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (ViewBag.deals != null && ViewBag.courses != null)
+                                    {
+                                        for (int i = 0; i < ViewBag.deals.Count; i++)
+                                        {
+                                    <tr>
+                                        <td class="product-thumbnail"><a href="#"><img src="@ViewBag.courses[i].Photo" alt=""></a></td>
+                                        <td class="product-name"><a href="#">@ViewBag.courses[i].Name</a></td>
+                                        <td class="product-price"><span class="amount">@ViewBag.deals[i].OrderDate</span></td>
+                                        <td class="product-stock-status"><span class="wishlist-in-stock">@ViewBag.deals[i].State</span></td>
+                                        @if (@ViewBag.deals[i].State == "Success")
+                                        {
+                                            <td class="product-add-to-cart"><a href="@ViewBag.courses[i].Link" style=""> Your Room </a></td>
+                                            <td class="product-quantity">
+                                                <input class="rating" type="number" value="@ViewBag.courses[i].Rating" max="5" min="1">
+                                                <a style="margin: 0px 10px" href="#" onclick="updateRate(@ViewBag.deals[i].ID, @i)">RATE</a>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td class="product-name"><a href="#" style=""></a></td>
+                                            <td class="product-quantity">
+                                            </td>
+                                        }
+                                    </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            You have no deal!
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- cart-main-area end -->
+
+<script>
+    async function updateRate(id, index) {
+        let rating = document.getElementsByClassName("rating")[index].value
+        let response = await fetch('/api/update-deal', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({ "id": id, "rate": rating })
+        })
+
+        let res = response.json()
+
+        console.log(res)
+    }
+</script>

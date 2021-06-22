@@ -1,0 +1,174 @@
+﻿@{
+    if (ViewBag.register == "fail")
+    {
+        <script>alert("Register Fail! Try again!")</script>
+    }
+}
+<!-- Start Bradcaump area -->
+<div class="ht__bradcaump__area bg-image--4">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="bradcaump__inner text-center">
+                    <h2 class="bradcaump-title">Create An Account</h2>
+                    <nav class="bradcaump-content">
+                        <a class="breadcrumb_item" href="index.html">Home</a>
+                        <span class="brd-separetor">/</span>
+                        <span class="breadcrumb_item active">Register</span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Bradcaump area -->
+<!-- Start My Account Area -->
+<section class="my_account_area pt--80 pb--55 bg--white">
+    <div class="container">
+        <div class="row" style="display: flex; justify-content: center;">
+            <div class="my__account__wrapper col-lg-11">
+                <form method="post" action="@Url.Action("post-register", "auth")" enctype="multipart/form-data">
+                    <h3 class="account__title">Register</h3>
+                    <div class="account__form">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="input__box">
+                                    <label>Username<span>*</span></label>
+                                    <input id="username" name="username" type="text">
+                                </div>
+                                <div class="input__box">
+                                    <label>Password<span>*</span></label>
+                                    <input id="pwd" name="pwd" type="password">
+                                </div>
+                                <div class="input__box">
+                                    <label>Email<span>*</span></label>
+                                    <input type="text" name="email">
+                                </div>
+                                <div class="row" name="birthday">
+                                    <div class="col-lg-4">
+                                        <div class="input__box">
+                                            <label>Day<span>*</span></label>
+                                            <input id="day" name="day" class="input-text qty" min="1" max="31" value="1" title="Qty" type="number">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="input__box">
+                                            <label>Month <span>*</span></label>
+                                            <select class="select__option" id="month" name="month">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="input__box">
+                                            <label>Year <span>*</span></label>
+                                            <input id="year" class="input-text qty" name="year" min="1930" max="2010" value="1999" title="Qty" type="number">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input__box">
+                                    <label>Gender<span>*</span></label>
+                                    <select class="select__option" id="gender" name="gender">
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
+                                </div>
+                                <div class="input__box">
+                                    <label>Avatar<span>*</span></label>
+                                    <input id="avatar" type="file" name="photo" onchange="avatarChange(this)">
+                                </div>
+                                <div class="input__box">
+                                    <label>School<span>*</span></label>
+                                    <input name="school" type="text">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="input__box">
+                                    <label>Address <span>*</span></label>
+                                    <input type="text" name="address">
+                                </div>
+                                <div class="input__box">
+                                    <label>City<span>*</span></label>
+                                    <input type="text" name="region">
+                                </div>
+                                <div class="input__box">
+                                    <label>Country<span>*</span></label>
+                                    <input type="text" name="country">
+                                </div>
+                                <div class="input__box">
+                                    <label>BankID<span>*</span></label>
+                                    <input type="text" name="bankid">
+                                </div>
+                                <div class="input__box">
+                                    <label>Your Bio</label>
+                                    <textarea class="col-12" style="height: 130px; border: 1px solid #e1e1e1" id="bio" name="bio"></textarea>
+                                </div>
+                                <div class="input__box">
+                                    <label>Confirm</label>
+                                    <div class="form__btn">
+                                        <button class="col-12" type="submit">Register</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End My Account Area -->
+
+<script>
+    function avatarChange(element) {
+        console.log(element.files[0])
+    }
+
+    /*async function registerClick() {
+        let student, teacher
+        if (document.getElementById('role').value == 'Student') {
+            student = true; teacher = false
+        }
+        else {
+            student = false; teacher = true
+        }
+
+        console.log(document.getElementById('avatar').files[0])
+        let newUser = {
+            'Username': document.getElementById('username').value,
+            'Password': document.getElementById('pwd').value,
+            'Bio': document.getElementById('bio').value,
+            'Birthday': document.getElementById('day').value + '/' + document.getElementById('month').value + '/' + document.getElementById('year').value,
+            'Address': document.getElementById('address').value,
+            'Region': document.getElementById('region').value,
+            'Country': document.getElementById('country').value,
+            'BankID': document.getElementById('bankid').value,
+            'Student': student,
+            'Teacher': teacher
+        }
+
+        let response = await fetch('/Auth/Register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({ 'newUser': newUser, 'photo': document.getElementById('avatar').files[0] })
+        });
+
+        let result = await response.json();
+
+        console.log(result);
+    }*/
+</script>
+

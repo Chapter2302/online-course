@@ -1,0 +1,135 @@
+﻿@model IEnumerable<onlineCourses.Models.Account>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800">Accounts List</h1>
+        <p class="mb-4">Home - List all students and teachers accounts </p>
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Database Accounts</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <p>
+                        @Html.ActionLink("Create New", "Create")
+                    </p>
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Username)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Password)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Bio)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Birthday)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Address)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Region)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Country)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.StartDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.BankID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Photo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Email)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.School)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Rating)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.WorkingPlace)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.isTeacher)
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Username)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Password)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Bio)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Birthday)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Region)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Country)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.StartDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.BankID)
+                                </td>
+                                <td>
+                                    <img src="@Html.DisplayFor(modelItem => item.Photo)" style="max-width: 150px; max-height: 100px"/> 
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.School)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Rating)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.WorkingPlace)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.isTeacher)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>

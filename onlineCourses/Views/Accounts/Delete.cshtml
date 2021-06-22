@@ -1,0 +1,143 @@
+﻿@model onlineCourses.Models.Account
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <div>
+        <h4>Account</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Username)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Username)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Password)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Password)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Bio)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Bio)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Birthday)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Birthday)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Region)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Region)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Country)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Country)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.StartDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BankID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BankID)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Photo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Photo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.School)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.School)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Rating)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Rating)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.WorkingPlace)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.WorkingPlace)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.isTeacher)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.isTeacher)
+            </dd>
+        </dl>
+    </div>
+    <p>
+         @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
+        <br />
+         @Html.ActionLink("Back to List", "Index")
+    </p>
+
+    <!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->

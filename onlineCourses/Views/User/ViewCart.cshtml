@@ -1,0 +1,148 @@
+﻿<!-- Start Bradcaump area -->
+<div class="ht__bradcaump__area bg-image--4">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="bradcaump__inner text-center">
+                    <h2 class="bradcaump-title">Shop Single</h2>
+                    <nav class="bradcaump-content">
+                        <a class="breadcrumb_item" href="index.html">Home</a>
+                        <span class="brd-separetor">/</span>
+                        <span class="breadcrumb_item active">Your Cart</span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Bradcaump area -->
+<!-- cart-main-area start -->
+<div class="cart-main-area section-padding--lg bg--white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ol-lg-12">
+                <form action="#">
+                    <div class="table-content wnro__table table-responsive">
+                        <table>
+                            <thead>
+                                <tr class="title-top">
+                                    <th class="product-thumbnail">Image</th>
+                                    <th class="product-name">Product</th>
+                                    <th class="product-price">Price</th>
+                                    <th class="product-remove">Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+                <div class="cartbox__total__area">
+                    <div class="cart__total__amount">
+                        <span>Grand Total</span>
+                        <span class="grand-total"></span>
+                    </div>
+                    <div style="margin: 15px 10px; font-size: 16px">
+                        <div>Please transfer payment to us via the following accounts:</div>
+                        <div>+ Vietcombank: <b>1675643657657</b> - Ben Nghe Branch</div>
+                        <div>+ BIDV: <b>1675643657657</b> - Thi Nghe Branch</div>
+                        <div>Syntax: <b>"Email Address - Pay For Online Courses"</b></div>
+                        <div>Example: <b>"Chapter2302@gmail.com - Pay For Online Courses"</b></div>
+                    </div>
+                </div>
+                <div class="cartbox__btn">
+                    <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-center">
+                        <li><a href="#" onclick="confirmClick(@Session["id"])">CONFIRM THE COURSES</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+<!-- cart-main-area end -->
+<script>
+    let courseCart = JSON.parse(localStorage.getItem('cart'))
+    let grandTotal = courseCart.reduce((pre, item) => {
+        return pre + item.Price
+    }, 0)
+    courseCart.map((item, i) => {
+        let tr = document.createElement('tr')
+        tr.id = i
+
+        let tdProductThumbnail = document.createElement('td')
+        tdProductThumbnail.className = 'product-thumbnail'
+        let img = document.createElement('img')
+        img.src = item.Photo
+        tdProductThumbnail.append(img)
+
+        let tdProductName = document.createElement('td')
+        tdProductName.className = 'product-name'
+        let aProName = document.createElement('a')
+        aProName.href = '/user/course-detail/' + item.ID
+        aProName.textContent = item.Name
+        tdProductName.append(aProName)
+
+        let tdProductPrice = document.createElement('td')
+        tdProductPrice.className = 'product-price'
+        let span = document.createElement('span')
+        span.className = 'amount'
+        span.value = item.Price
+        span.textContent = '$' + item.Price + '.00'
+        tdProductPrice.append(span)
+
+        let tdProductRemove = document.createElement('td')
+        tdProductRemove.className = 'product-remove'
+        let btn = document.createElement('button')
+        btn.classList = 'btn btn-danger'
+        btn.textContent = 'DELETE'
+        btn.addEventListener('click', () => {
+            if (confirm("Do you want to delete?")) {
+                document.getElementById(i).remove()
+                courseCart.splice(i, 1)
+                document.getElementsByClassName('grand-total')[0].textContent = '$' + (grandTotal - item.Price) + '.00'
+            }
+        })
+        tdProductRemove.append(btn)
+
+        tr.append(tdProductThumbnail)
+        tr.append(tdProductName)
+        tr.append(tdProductPrice)
+        tr.append(tdProductRemove)
+
+        document.getElementsByTagName('tbody')[0].append(tr)
+    })
+
+    document.getElementsByClassName('grand-total')[0].textContent = '$' + grandTotal +'.00'
+
+    async function confirmClick(id) {
+        if (id == null) {
+            alert("Please Login or Regist an account!")
+        }
+        else {
+            if (confirm("CONFIRM TO BUY COURSES")) {
+                console.log(courseCart)
+                let response = await fetch('/api/post-deals', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify({ "courseCart": courseCart })
+                });
+
+                let result = await response.json();
+                //let result = 'success'
+                console.log(result);
+
+                if (result == 'success') {
+                    //localStorage.clear()
+                    alert("Add deals successfully!")
+                    window.location.href = '/user/my-courses'
+                }
+                else {
+                    alert("Add deals fail, try later!")
+                }
+            }
+        }
+    }
+</script>
